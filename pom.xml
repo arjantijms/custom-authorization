@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+    <groupId>org.omnifaces</groupId>
+	<artifactId>custom-authorization</artifactId>
+    <version>0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	
+	<build>
+        <finalName>custom-authorization</finalName>
+	</build>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>cdi-jacc-provider</artifactId>
+            <version>0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    
+    <profiles>
+        
+        <!-- 
+            This profile assumes a target that already has the Soteria libraries. 
+            In Java EE 8 that would be the default. E.g. in the case of GlassFish/Payara
+            a soteria-1.0-m02-SNAPSHOT.jar in [gf_home]/glassfish/modules 
+          -->
+        <profile>
+            <id>provided</id>
+            <dependencies>
+                <dependency>
+                   <groupId>javax.security</groupId>
+                   <artifactId>javax.security-api</artifactId>
+                   <version>1.0-m02-SNAPSHOT</version>
+                   <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>  
+            
+        <!-- 
+            This profile assumes a target that does not have the Soteria libraries. 
+            E.g. a Java EE 7 server or Servlet container such as Tomcat or Jetty.
+            
+            With this profile e.g. soteria-1.0-m02-SNAPSHOT.jar will end up in WEB-INF/lib
+        -->
+        <profile>
+            <id>bundled</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                   <groupId>org.glassfish.soteria</groupId>
+                    <artifactId>soteria</artifactId>
+                    <version>1.0-m02-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+        </profile> 
+    </profiles>
+</project>
