@@ -1,5 +1,6 @@
 package org.omnifaces.authorization;
 
+import static java.lang.System.out;
 import static javax.security.identitystore.CredentialValidationResult.Status.VALID;
 
 import javax.enterprise.context.RequestScoped;
@@ -23,6 +24,8 @@ public class CustomAuthenticationMechanism implements HttpAuthenticationMechanis
     @Override
     public AuthStatus validateRequest(HttpServletRequest request, HttpServletResponse response, HttpMessageContext httpMessageContext) throws AuthException {
 
+        out.println("validateRequest called. Authentication mandatory: " + httpMessageContext.isProtected());
+        
         if (request.getParameter("name") != null && request.getParameter("password") != null) {
 
             CredentialValidationResult result = identityStore.validate(
