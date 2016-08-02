@@ -19,6 +19,17 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
     
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-javaee-security-maven</id>
+            <name>bintray</name>
+            <url>https://dl.bintray.com/javaee-security-spec/maven</url>
+        </repository>
+    </repositories>
+    
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
@@ -48,7 +59,7 @@
                 <dependency>
                    <groupId>javax.security</groupId>
                    <artifactId>javax.security-api</artifactId>
-                   <version>1.0-m02-SNAPSHOT</version>
+                   <version>1.0-m01</version>
                    <scope>provided</scope>
                 </dependency>
             </dependencies>
@@ -69,7 +80,7 @@
                 <dependency>
                    <groupId>org.glassfish.soteria</groupId>
                     <artifactId>soteria</artifactId>
-                    <version>1.0-m02-SNAPSHOT</version>
+                    <version>1.0-m01</version>
                 </dependency>
             </dependencies>
         </profile> 
